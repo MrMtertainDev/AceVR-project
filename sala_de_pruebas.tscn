@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://be7gdnaahmrvn"]
+
+[ext_resource type="Script" path="res://jugador.gd" id="1_0lhv8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g5ffq"]
+albedo_color = Color(0.211765, 0.380392, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_l3dnn"]
+size = Vector2(5, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iu4xw"]
+albedo_color = Color(0.568627, 0.443137, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y28u6"]
+albedo_color = Color(0.831373, 0, 0.439216, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uy1ft"]
+albedo_color = Color(0, 0.537255, 0.454902, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rtxeq"]
+albedo_color = Color(0.439216, 0.439216, 0.439216, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8jwbb"]
+
+[sub_resource type="Environment" id="Environment_vpume"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.3
+
+[node name="sala_de_pruebas" type="Node3D"]
+
+[node name="paredes" type="Node3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 5, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="norte" type="MeshInstance3D" parent="paredes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -2.5)
+material_override = SubResource("StandardMaterial3D_g5ffq")
+mesh = SubResource("PlaneMesh_l3dnn")
+
+[node name="sur" type="MeshInstance3D" parent="paredes"]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, 0, 2.5)
+material_override = SubResource("StandardMaterial3D_iu4xw")
+mesh = SubResource("PlaneMesh_l3dnn")
+
+[node name="este" type="MeshInstance3D" parent="paredes"]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 2.5, 0, 0)
+material_override = SubResource("StandardMaterial3D_y28u6")
+mesh = SubResource("PlaneMesh_l3dnn")
+
+[node name="oeste" type="MeshInstance3D" parent="paredes"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -2.5, 0, 0)
+material_override = SubResource("StandardMaterial3D_uy1ft")
+mesh = SubResource("PlaneMesh_l3dnn")
+
+[node name="suelo" type="MeshInstance3D" parent="paredes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
+material_override = SubResource("StandardMaterial3D_rtxeq")
+mesh = SubResource("PlaneMesh_l3dnn")
+
+[node name="techo" type="MeshInstance3D" parent="paredes"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 2.5, 0)
+material_override = SubResource("StandardMaterial3D_8jwbb")
+mesh = SubResource("PlaneMesh_l3dnn")
+
+[node name="jugador" type="Node3D" parent="."]
+script = ExtResource("1_0lhv8")
+
+[node name="pivote" type="Node3D" parent="jugador"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="camara" type="Camera3D" parent="jugador/pivote"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.3)
+current = true
+
+[node name="entorno" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vpume")
